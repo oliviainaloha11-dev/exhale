@@ -50,4 +50,4 @@
 
 /* About page: placeholder the student fills in */
 .from-maker { font-style: normal; }
-.signature { color: var(--text); margin-top: var(--space-1); }
+.soft-note .signature { color: var(--text); margin-top: var(--space-2); }
