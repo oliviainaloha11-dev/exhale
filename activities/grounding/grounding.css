@@ -1,0 +1,62 @@
+/* =========================================================
+   grounding.css
+   ========================================================= */
+
+/* Each screen fades softly in when it appears */
+.g-screen { animation: g-in 700ms var(--ease) both; }
+.g-screen h1:focus { outline: none; }
+
+@keyframes g-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.g-progress {
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+/* The big number in a soft glowing circle */
+.g-number {
+  display: grid;
+  place-items: center;
+  width: 108px;
+  height: 108px;
+  margin: var(--space-3) auto var(--space-3);
+  border-radius: 50%;
+  font-size: 3rem;
+  font-weight: 300;
+  color: var(--cream-50);
+  background: radial-gradient(circle at 35% 30%, rgba(168, 187, 211, 0.25), transparent 65%), var(--blue-700);
+  border: 1px solid var(--line);
+  box-shadow: 0 0 50px rgba(232, 196, 143, 0.12);
+}
+
+.g-prompt { font-size: clamp(1.4rem, 5vw, 1.9rem); }
+
+/* Tap-to-notice dots */
+.g-dots {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-top: var(--space-3);
+}
+.g-dot {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1.5px solid rgba(244, 234, 216, 0.4);
+  background: transparent;
+  cursor: pointer;
+  transition: background 500ms var(--ease), border-color 500ms var(--ease), transform 500ms var(--ease), box-shadow 500ms var(--ease);
+}
+.g-dot:hover { border-color: var(--cream-100); }
+.g-dot[aria-pressed="true"] {
+  background: var(--honey);
+  border-color: var(--honey);
+  box-shadow: 0 0 16px rgba(232, 196, 143, 0.5);
+  transform: scale(1.08);
+}

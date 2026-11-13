@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Journal · exhale</title>
+  <meta name="description" content="A private journal with a gentle daily prompt. Write freely, then download your entry as a .txt or PDF. Nothing is uploaded.">
+  <meta name="theme-color" content="#111f33">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+
+  <!-- SEO + social sharing preview. Once the site is live, replace
+       YOUR-SITE-URL in every file with your real address (see README). -->
+  <link rel="canonical" href="https://YOUR-SITE-URL/journal/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="exhale">
+  <meta property="og:title" content="Journal · exhale">
+  <meta property="og:description" content="A private journal with a gentle daily prompt. Write freely, then download your entry as a .txt or PDF. Nothing is uploaded.">
+  <meta property="og:url" content="https://YOUR-SITE-URL/journal/">
+  <meta property="og:image" content="https://YOUR-SITE-URL/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="exhale: a quiet place to breathe between studying">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="journal.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <a class="brand" href="../index.html">exhale</a>
+    <nav class="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../timer/index.html">Study Timer</a></li>
+        <li><a href="index.html" aria-current="page">Journal</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main" class="page-narrow">
+    <h1>Journal</h1>
+    <p class="lede">Write for yourself. Your words stay on this device. Download them if you'd like to keep them.</p>
+
+    <!-- Today's prompt -->
+    <section class="prompt" id="promptBox" aria-labelledby="promptLabel">
+      <p class="prompt-label" id="promptLabel">Today's prompt</p>
+      <p class="prompt-text" id="promptText"></p>
+      <div class="prompt-actions">
+        <button class="text-btn" id="nextPromptBtn" type="button">Another prompt</button>
+        <button class="text-btn" id="hidePromptBtn" type="button">Free write instead</button>
+      </div>
+    </section>
+    <p class="prompt-show" id="showPromptWrap" hidden>
+      <button class="text-btn" id="showPromptBtn" type="button">Show a prompt</button>
+    </p>
+
+    <!-- Writing area -->
+    <div class="entry panel">
+      <p class="entry-date" id="dateText"></p>
+      <label class="visually-hidden" for="entry">Your journal entry</label>
+      <textarea id="entry" rows="12" placeholder="Start anywhere…"></textarea>
+    </div>
+
+    <p class="entry-meta">
+      <span id="saveText" aria-live="polite">Nothing saved yet.</span>
+      <span id="countText"></span>
+    </p>
+
+    <div class="controls">
+      <button class="btn btn-primary" id="pdfBtn" type="button">Download PDF</button>
+      <button class="btn" id="txtBtn" type="button">Download .txt</button>
+      <button class="btn" id="clearBtn" type="button">Clear my draft</button>
+    </div>
+
+    <!-- "Are you sure?" for clearing -->
+    <div class="confirm" id="confirmClear" hidden>
+      <p>Clear your draft? This can't be undone.</p>
+      <div class="controls">
+        <button class="btn btn-primary" id="yesClearBtn" type="button">Yes, clear it</button>
+        <button class="btn" id="keepBtn" type="button">Keep it</button>
+      </div>
+    </div>
+
+    <p class="status" id="status" aria-live="polite"></p>
+
+    <p class="privacy-note">
+      Your draft autosaves only in this browser, so it's still here if you close the tab. It's never sent anywhere,
+      and no one else can see it. Using a shared computer? Press "Clear my draft" when you're done.
+    </p>
+
+    <!-- Hidden layout used only for the browser's "Save as PDF" print option -->
+    <div class="print-sheet" id="printSheet" aria-hidden="true"></div>
+  </main>
+
+  <footer class="site-footer">
+    <nav aria-label="Footer">
+      <a href="../resources/index.html">Need to talk to someone?</a>
+      <a href="../about/index.html">About</a>
+    </nav>
+    <p>Free, private, and made by a student for students.</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script src="pdf-maker.js"></script>
+  <script src="prompts.js"></script>
+  <script src="journal.js"></script>
+</body>
+</html>

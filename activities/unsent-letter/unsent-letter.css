@@ -1,0 +1,118 @@
+/* =========================================================
+   unsent-letter.css
+   ========================================================= */
+
+.letter {
+  --line-height: 2rem;               /* spacing of the ruled lines */
+  position: relative;
+  margin-top: var(--space-4);
+  text-align: left;
+  transition: opacity 900ms var(--ease), transform 900ms var(--ease);
+}
+
+/* "Dear ______" line */
+.letter-to {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5em;
+  margin-bottom: var(--space-1);
+  font-weight: 300;
+  font-size: 1.1rem;
+}
+.letter-to input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.2rem 0;
+  font: inherit;
+  color: var(--text);
+  background: transparent;
+  border: 0;
+  border-bottom: 1px dashed rgba(244, 234, 216, 0.25);
+}
+.letter-to input::placeholder { color: var(--text-faint); }
+.letter-to input:focus { outline: none; border-bottom-color: var(--honey); }
+
+/* Shared look for the textarea AND the dissolving copy of it,
+   so the words don't jump when we swap one for the other */
+.letter textarea,
+.letter-ghost {
+  display: block;
+  width: 100%;
+  min-height: calc(var(--line-height) * 8);
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  font-weight: 300;
+  font-size: 1.05rem;
+  line-height: var(--line-height);
+  color: var(--text);
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  /* faint ruled lines, like notebook paper */
+  background-image: linear-gradient(transparent calc(var(--line-height) - 1px), rgba(244, 234, 216, 0.08) calc(var(--line-height) - 1px));
+  background-size: 100% var(--line-height);
+  background-attachment: local;
+}
+
+.letter textarea {
+  resize: none;
+  overflow: hidden;      /* it grows instead of scrolling (see JS) */
+  border: 0;
+  background-color: transparent;
+}
+.letter textarea::placeholder { color: var(--text-faint); }
+.letter textarea:focus { outline: none; }
+
+/* Show a warm ring around the whole letter while typing */
+.letter:focus-within { border-color: rgba(232, 196, 143, 0.4); }
+
+
+/* ---------- DISSOLVING ---------- */
+
+/* Each word drifts up and blurs away at its own pace.
+   --delay, --dx, --dy and --rot are set per word in the JS. */
+.ghost-word {
+  display: inline-block;
+  animation: drift-away 2.2s var(--ease) var(--delay) forwards;
+}
+@keyframes drift-away {
+  to {
+    opacity: 0;
+    filter: blur(6px);
+    transform: translate(var(--dx), var(--dy)) rotate(var(--rot));
+  }
+}
+
+/* The "Dear ___" line softly blurs away first */
+.letter-to {
+  transition: opacity 1.6s var(--ease), filter 1.6s var(--ease);
+}
+.letter-to.is-dissolving {
+  opacity: 0;
+  filter: blur(6px);
+}
+
+/* After the words are gone, the paper itself fades */
+.letter.is-fading {
+  opacity: 0;
+  transform: translateY(-12px) scale(0.98);
+}
+
+
+/* ---------- CONFIRM + AFTER ---------- */
+.letter-confirm,
+.letter-after {
+  margin-top: var(--space-4);
+  animation: page-in 900ms var(--ease) both;   /* page-in is in base.css */
+}
+.letter-confirm p { color: var(--text-muted); margin: 0; }
+.letter-confirm .controls { margin-top: var(--space-2); }
+
+.letter-after { padding-top: var(--space-4); }
+.letter-after:focus { outline: none; }
+.letter-after p { color: var(--text-muted); }
+.letter-after-big {
+  font-size: 1.6rem;
+  font-weight: 300;
+  color: var(--text) !important;
+}

@@ -1,0 +1,99 @@
+/* =========================================================
+   breathing.css — styles for the box breathing square
+   ========================================================= */
+
+.breath {
+  position: relative;
+  width: min(78vw, 340px);
+  aspect-ratio: 1;
+  margin: var(--space-4) auto 0;
+}
+
+.breath-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* Faint full outline */
+.breath-track {
+  fill: none;
+  stroke: var(--dusty-400);
+  stroke-opacity: 0.28;
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+
+/* Bright tracing line.
+   The path is 640 units long (4 sides × 160). breathing.js
+   changes stroke-dashoffset from 640 → 0 to "draw" it. */
+.breath-progress {
+  fill: none;
+  stroke: var(--cream-100);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 640;
+  stroke-dashoffset: 640;
+}
+
+/* The traveling light, with a warm glow */
+.breath-dot {
+  fill: var(--honey);
+  filter: drop-shadow(0 0 6px rgba(232, 196, 143, 0.9));
+  opacity: 0;
+  transition: opacity 800ms var(--ease);
+}
+.breath.is-running .breath-dot { opacity: 1; }
+
+/* Inner square that swells with your breath */
+.breath-fill {
+  fill: var(--blue-600);
+  fill-opacity: 0.35;
+  stroke: rgba(244, 234, 216, 0.12);
+  /* scale from its own center */
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(0.55);
+}
+
+/* Words in the middle of the square */
+.breath-cue {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+.breath-phase {
+  margin: 0;
+  font-size: clamp(1.1rem, 4.5vw, 1.4rem);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  transition: opacity 500ms var(--ease);
+}
+/* The countdown hangs just below the words, so the words stay centered */
+.breath-count {
+  position: absolute;
+  top: calc(50% + 1.1rem);
+  margin: 0;
+  min-height: 1.6em;
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Text fades a little between phases */
+.breath-phase.is-changing { opacity: 0.2; }
+
+.breath-options { margin-top: var(--space-3); }
+
+.breath-rounds {
+  margin-top: var(--space-3);
+  min-height: 1.6em;
+  font-size: 0.9rem;
+  color: var(--text-faint);
+}

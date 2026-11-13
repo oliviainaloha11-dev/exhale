@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Box breathing · exhale</title>
+  <meta name="description" content="A guided box breathing exercise: breathe in, hold, breathe out, hold, four seconds each. Free, calm, and private.">
+  <meta name="theme-color" content="#111f33">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+
+  <!-- SEO + social sharing preview. Once the site is live, replace
+       YOUR-SITE-URL in every file with your real address (see README). -->
+  <link rel="canonical" href="https://YOUR-SITE-URL/activities/breathing/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="exhale">
+  <meta property="og:title" content="Box breathing · exhale">
+  <meta property="og:description" content="A guided box breathing exercise: breathe in, hold, breathe out, hold, four seconds each. Free, calm, and private.">
+  <meta property="og:url" content="https://YOUR-SITE-URL/activities/breathing/">
+  <meta property="og:image" content="https://YOUR-SITE-URL/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="exhale: a quiet place to breathe between studying">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- This page is two folders deep, so shared files are at ../../ -->
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="breathing.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <a class="brand" href="../../index.html">exhale</a>
+    <nav class="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="../../timer/index.html">Study Timer</a></li>
+        <li><a href="../../journal/index.html">Journal</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main" class="page-narrow">
+    <a class="back-link" href="../../index.html"><span aria-hidden="true">←</span> back home</a>
+
+    <h1>Box breathing</h1>
+    <p class="lede">In, hold, out, hold. Four seconds each. Follow the light around the square.</p>
+
+    <!-- ===== THE BREATHING SQUARE =====
+         Drawn with SVG. breathing.js moves the dot and the glowing line. -->
+    <div class="breath" id="breath">
+      <svg class="breath-svg" viewBox="0 0 200 200" aria-hidden="true">
+        <!-- soft square in the middle that grows as you breathe in -->
+        <rect class="breath-fill" id="breathFill" x="40" y="40" width="120" height="120" rx="18"/>
+        <!-- faint outline of the full path -->
+        <path class="breath-track" d="M20 20 H180 V180 H20 Z"/>
+        <!-- the bright line that traces as time passes -->
+        <path class="breath-progress" id="breathProgress" d="M20 20 H180 V180 H20 Z"/>
+        <!-- the little traveling light -->
+        <circle class="breath-dot" id="breathDot" cx="20" cy="20" r="6"/>
+      </svg>
+
+      <!-- Text cue sits on top of the square -->
+      <div class="breath-cue">
+        <p class="breath-phase" id="phaseText">Ready when you are</p>
+        <p class="breath-count" id="countText" aria-hidden="true"></p>
+      </div>
+    </div>
+
+    <!-- Screen readers hear each new phase ("Breathe in", "Hold"…) -->
+    <p class="visually-hidden" aria-live="polite" id="announce"></p>
+
+    <div class="controls">
+      <button class="btn btn-primary" id="startBtn" type="button">Begin</button>
+      <button class="btn" id="resetBtn" type="button" disabled>Start over</button>
+    </div>
+
+    <div class="controls breath-options">
+      <label class="switch">
+        <input type="checkbox" id="chimeToggle">
+        Soft chime on each step
+      </label>
+    </div>
+
+    <p class="breath-rounds" id="roundsText" aria-live="polite"></p>
+  </main>
+
+  <footer class="site-footer">
+    <nav aria-label="Footer">
+      <a href="../../resources/index.html">Need to talk to someone?</a>
+      <a href="../../about/index.html">About</a>
+    </nav>
+    <p>Free, private, and made by a student for students.</p>
+  </footer>
+
+  <script src="../../js/main.js"></script>
+  <script src="../../js/chime.js"></script>
+  <script src="breathing.js"></script>
+</body>
+</html>

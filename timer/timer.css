@@ -1,0 +1,155 @@
+/* =========================================================
+   timer.css — study timer
+   ========================================================= */
+
+/* Focus / Break pill switch */
+.mode-switch {
+  display: inline-flex;
+  padding: 4px;
+  margin-top: var(--space-2);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+}
+.mode-btn {
+  min-height: 40px;
+  padding: 0.4rem 1.3rem;
+  font: inherit;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: background var(--slow) var(--ease), color var(--slow) var(--ease);
+}
+.mode-btn[aria-pressed="true"] { color: var(--navy-900); background: var(--cream-100); }
+
+/* The clock */
+.clock {
+  position: relative;
+  width: min(76vw, 300px);
+  aspect-ratio: 1;
+  margin: var(--space-4) auto 0;
+}
+.clock-ring {
+  position: absolute;
+  inset: 0;
+  transform: rotate(-90deg);
+}
+.clock-ring circle { fill: none; stroke-width: 2; }
+.clock-track { stroke: rgba(244, 234, 216, 0.1); }
+.clock-fill {
+  stroke: var(--cream-300);
+  stroke-linecap: round;
+  stroke-dasharray: 289.03;   /* 2 × π × 46 */
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.6s linear, stroke 1s var(--ease);
+}
+/* Breaks use the dusty blue, so you can tell at a glance */
+.clock.is-break .clock-fill { stroke: var(--dusty-300); }
+
+.clock-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.clock-time {
+  margin: 0;
+  font-size: clamp(3rem, 15vw, 4.2rem);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.clock-mode {
+  margin: 0;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+/* When time is up: a soft warm glow that breathes a few times */
+.clock.is-done::before {
+  content: "";
+  position: absolute;
+  inset: 6%;
+  border-radius: 50%;
+  box-shadow: 0 0 60px rgba(232, 196, 143, 0.35);
+  animation: done-glow 3s ease-in-out 3;
+  opacity: 0;
+}
+@keyframes done-glow {
+  50% { opacity: 1; }
+}
+
+.sessions {
+  font-size: 0.875rem;
+  color: var(--text-faint);
+}
+
+/* Break idea card */
+.break-card {
+  margin-top: var(--space-3);
+  text-align: left;
+  animation: page-in 900ms var(--ease) both;
+}
+.break-label {
+  margin-bottom: var(--space-1);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--honey);
+}
+.break-link {
+  display: block;
+  text-decoration: none;
+  color: var(--text);
+}
+.break-link strong { display: block; font-weight: 500; font-size: 1.15rem; }
+.break-link strong::after { content: " →"; color: var(--honey); transition: margin var(--slow) var(--ease); }
+.break-link:hover strong::after { margin-left: 4px; }
+.break-link span { color: var(--text-muted); }
+.break-small {
+  margin: var(--space-2) 0 0;
+  font-size: 0.85rem;
+  color: var(--text-faint);
+}
+/* .text-btn lives in css/base.css; here it sits inline in a sentence */
+.break-small .text-btn { min-height: 0; margin-left: 0.4em; }
+
+/* Settings */
+.settings {
+  margin-top: var(--space-4);
+  color: var(--text-muted);
+}
+.settings summary {
+  display: inline-block;
+  cursor: pointer;
+  font-size: 0.95rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 8px;
+}
+.settings summary::-webkit-details-marker { display: none; }
+.settings summary::before { content: "+ "; color: var(--honey); }
+.settings[open] summary::before { content: "− "; }
+.settings-body {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  margin-top: var(--space-2);
+}
+.settings-body label:not(.switch) { display: inline-flex; align-items: center; gap: 0.5em; }
+.field.num {
+  width: 5.2em;
+  min-height: 42px;
+  padding: 0.4rem 0.8rem;
+  text-align: center;
+  border-radius: 12px;
+}
+.settings-note { width: 100%; margin: 0; font-size: 0.8rem; color: var(--text-faint); }

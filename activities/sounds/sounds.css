@@ -1,0 +1,128 @@
+/* =========================================================
+   sounds.css — the mixer
+   ========================================================= */
+
+.presets {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-1);
+  margin-top: var(--space-3);
+}
+.chip { min-height: 38px; padding: 0.4rem 1rem; font-size: 0.875rem; }
+
+.sound-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  list-style: none;
+}
+@media (max-width: 520px) {
+  .sound-list { grid-template-columns: 1fr; }
+}
+
+/* One sound card */
+.sound {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  align-items: center;
+  gap: 0.6rem 0.9rem;
+  padding: var(--space-2) var(--space-3);
+  text-align: left;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  transition: border-color 1s var(--ease), box-shadow 1s var(--ease), background 1s var(--ease);
+}
+.sound .slider { grid-column: 1 / -1; }
+
+/* While a sound is playing, its card glows a little */
+.sound.is-on {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(232, 196, 143, 0.35);
+  box-shadow: 0 0 30px rgba(232, 196, 143, 0.08);
+}
+
+.sound-icon {
+  width: 26px;
+  height: 26px;
+  fill: none;
+  stroke: var(--cream-100);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.6;
+  transition: opacity 1s var(--ease), stroke 1s var(--ease);
+}
+.sound.is-on .sound-icon {
+  opacity: 1;
+  stroke: var(--honey);
+  animation: icon-breathe 4s ease-in-out infinite;
+}
+@keyframes icon-breathe {
+  50% { opacity: 0.65; }
+}
+.sound-label { font-weight: 500; }
+
+/* ---------- Range slider ----------
+   --fill is set by sounds.js so the left part of the track is
+   brighter, up to the thumb. */
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 28px;               /* tall touch target, thin visible track */
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.slider::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--cream-300) var(--fill, 0%), rgba(244, 234, 216, 0.14) var(--fill, 0%));
+}
+.slider::-moz-range-track {
+  height: 4px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--cream-300) var(--fill, 0%), rgba(244, 234, 216, 0.14) var(--fill, 0%));
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: -8px;
+  border-radius: 50%;
+  background: var(--cream-100);
+  border: 0;
+  box-shadow: 0 2px 8px rgba(5, 10, 20, 0.4);
+}
+.slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--cream-100);
+  border: 0;
+}
+.slider:focus-visible { outline: none; }
+.slider:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 3px var(--navy-900), 0 0 0 5px var(--focus); }
+.slider:focus-visible::-moz-range-thumb { box-shadow: 0 0 0 3px var(--navy-900), 0 0 0 5px var(--focus); }
+
+.master {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  max-width: 420px;
+  margin: var(--space-4) auto 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+.master label { flex: none; }
+
+.sound-tip {
+  margin-top: var(--space-3);
+  font-size: 0.85rem;
+  color: var(--text-faint);
+}

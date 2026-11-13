@@ -1,0 +1,113 @@
+/* =========================================================
+   journal.css
+   ========================================================= */
+
+/* Prompt */
+.prompt {
+  margin-top: var(--space-4);
+  animation: page-in 900ms var(--ease) both;
+}
+.prompt-label {
+  margin-bottom: var(--space-1);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--honey);
+}
+.prompt-text {
+  font-size: clamp(1.2rem, 4.2vw, 1.45rem);
+  font-weight: 300;
+  line-height: 1.45;
+  transition: opacity 500ms var(--ease);
+}
+.prompt-text.is-changing { opacity: 0; }
+.prompt-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-1) var(--space-3);
+  font-size: 0.875rem;
+}
+.prompt-show { margin-top: var(--space-4); font-size: 0.875rem; }
+
+/* (.text-btn lives in css/base.css) */
+
+/* Writing area */
+.entry {
+  --line-height: 1.9rem;
+  margin-top: var(--space-3);
+  text-align: left;
+}
+.entry:focus-within { border-color: rgba(232, 196, 143, 0.4); }
+.entry-date {
+  margin-bottom: var(--space-1);
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+.entry textarea {
+  display: block;
+  width: 100%;
+  min-height: calc(var(--line-height) * 10);
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  font-weight: 300;
+  font-size: 1.05rem;
+  line-height: var(--line-height);
+  color: var(--text);
+  background-color: transparent;
+  background-image: linear-gradient(transparent calc(var(--line-height) - 1px), rgba(244, 234, 216, 0.07) calc(var(--line-height) - 1px));
+  background-size: 100% var(--line-height);
+  background-attachment: local;
+  border: 0;
+  resize: none;
+  overflow: hidden;
+}
+.entry textarea::placeholder { color: var(--text-faint); }
+.entry textarea:focus { outline: none; }
+
+.entry-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+  font-size: 0.8rem;
+  color: var(--text-faint);
+}
+
+.confirm { margin-top: var(--space-3); animation: page-in 600ms var(--ease) both; }
+.confirm p { margin: 0; color: var(--text-muted); }
+.confirm .controls { margin-top: var(--space-2); }
+
+.privacy-note {
+  max-width: 34em;
+  margin: var(--space-4) auto 0;
+  font-size: 0.85rem;
+  color: var(--text-faint);
+}
+
+/* ---------- PRINT ("Save as PDF" fallback) ----------
+   When printing, hide the whole site and show only the
+   clean entry in #printSheet: dark text on white paper. */
+.print-sheet { display: none; }
+
+@media print {
+  @page { margin: 2cm; }
+  body { background: #fff !important; color: #111f33 !important; animation: none; }
+  body::before { display: none; }
+  body > *:not(main),
+  main > *:not(.print-sheet) { display: none !important; }
+  main { padding: 0; max-width: none; }
+  .print-sheet {
+    display: block !important;
+    text-align: left;
+    font-size: 11.5pt;
+    line-height: 1.6;
+  }
+  .print-sheet .ps-brand { font-size: 8.5pt; letter-spacing: 0.12em; color: #667; margin: 0 0 18pt; }
+  .print-sheet h2 { font-size: 20pt; font-weight: 600; margin: 0 0 8pt; color: #111f33; }
+  .print-sheet .ps-prompt { font-style: italic; color: #556; margin: 0 0 14pt; }
+  .print-sheet hr { border: 0; border-top: 0.6pt solid #c0ccd8; margin: 0 0 14pt; }
+  .print-sheet .ps-body { white-space: pre-wrap; overflow-wrap: break-word; color: #111f33; }
+  .print-sheet .ps-foot { margin-top: 24pt; font-size: 8.5pt; color: #667; }
+}

@@ -1,0 +1,424 @@
+/* =========================================================
+   base.css — shared styles used on EVERY page
+   ---------------------------------------------------------
+   1. Color + spacing tokens (change the whole look here)
+   2. Reset + page background
+   3. Header / top-right navigation
+   4. Buttons, links, form bits
+   5. Footer
+   6. Small helpers (visually-hidden, back link, etc.)
+   7. Reduced motion
+   ========================================================= */
+
+
+/* ---------- 1. TOKENS ----------
+   Tokens are named variables. Change a value here and it
+   updates everywhere it's used. */
+:root {
+  /* Blues — backgrounds, from deepest to lightest */
+  --navy-950: #0c1626;
+  --navy-900: #111f33;
+  --navy-800: #182a43;
+  --blue-700: #24395a;
+  --blue-600: #34507a;
+  --dusty-400: #7f98b8;
+  --dusty-300: #a8bbd3;
+
+  /* Creams — text and warm accents */
+  --cream-50:  #fbf6ec;
+  --cream-100: #f4ead8;
+  --cream-300: #e3d2b4;
+  --honey:     #e8c48f;   /* warm glow — use sparingly */
+
+  /* What things are FOR (use these in your CSS) */
+  --text:        var(--cream-100);
+  --text-muted:  rgba(244, 234, 216, 0.72);
+  --text-faint:  rgba(244, 234, 216, 0.5);
+  --line:        rgba(244, 234, 216, 0.14);
+  --surface:     rgba(255, 255, 255, 0.04);
+  --surface-hover: rgba(255, 255, 255, 0.08);
+  --focus:       var(--honey);
+
+  /* Type */
+  --font: "Manrope", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* Spacing scale (lots of breathing room) */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2.5rem;
+  --space-5: 4rem;
+  --space-6: 6rem;
+
+  /* Shapes + motion */
+  --radius: 20px;
+  --radius-pill: 999px;
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);   /* soft in-and-out */
+  --slow: 600ms;
+
+  --max-width: 980px;
+  --reading-width: 620px;
+}
+
+
+/* ---------- 2. RESET + BACKGROUND ---------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+/* Anything with the "hidden" attribute stays hidden, even if
+   another rule gives it display:flex or display:block */
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font);
+  font-weight: 400;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--text);
+  background-color: var(--navy-900);
+  -webkit-font-smoothing: antialiased;
+  /* Every page gently fades in, like opening your eyes */
+  animation: page-in 900ms var(--ease) both;
+}
+
+/* The background lives on a fixed layer behind everything,
+   so it doesn't jump around on phones when you scroll. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    /* a faint warm glow near the top — the "cozy" part */
+    radial-gradient(60% 45% at 50% 0%, rgba(232, 196, 143, 0.10), transparent 70%),
+    /* deep navy fading down into dusty blue */
+    linear-gradient(180deg, var(--navy-950) 0%, var(--navy-900) 45%, var(--navy-800) 80%, var(--blue-700) 130%);
+}
+
+@keyframes page-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+h1, h2, h3 {
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin: 0 0 var(--space-2);
+}
+h1 { font-size: clamp(1.75rem, 5vw, 2.4rem); font-weight: 400; }
+h2 { font-size: 1.35rem; }
+
+p { margin: 0 0 var(--space-2); }
+
+img, svg { display: block; max-width: 100%; }
+
+a { color: var(--cream-50); text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
+a:hover { color: var(--honey); }
+
+/* One clear, warm focus ring for keyboard users everywhere */
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 4px;
+  border-radius: 6px;
+}
+
+
+/* ---------- 3. HEADER + NAV ---------- */
+.site-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-1) var(--space-3);
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-3) var(--space-2);
+}
+
+.brand {
+  font-weight: 500;
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+  color: var(--cream-100);
+  text-decoration: none;
+}
+.brand:hover { color: var(--cream-50); }
+
+.site-nav ul {
+  display: flex;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-nav a {
+  position: relative;
+  display: inline-block;
+  padding: 0.25rem 0;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color var(--slow) var(--ease);
+}
+.site-nav a:hover { color: var(--cream-50); }
+
+/* The current page gets a tiny warm dot underneath */
+.site-nav a[aria-current="page"] { color: var(--cream-50); }
+.site-nav a[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -4px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--honey);
+  transform: translateX(-50%);
+}
+
+@media (max-width: 420px) {
+  .site-nav ul { gap: var(--space-2); }
+  .site-nav a { font-size: 0.9rem; }
+}
+
+
+/* ---------- MAIN CONTENT AREA ---------- */
+main {
+  flex: 1;
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-3) var(--space-2) var(--space-5);
+}
+
+/* A narrower, centered column for activity pages */
+.page-narrow {
+  max-width: var(--reading-width);
+  text-align: center;
+}
+
+.lede {
+  color: var(--text-muted);
+  max-width: 34em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* ---------- 4. BUTTONS + FORM BITS ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  min-height: 44px;              /* big enough for thumbs */
+  padding: 0.6rem 1.4rem;
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background var(--slow) var(--ease), border-color var(--slow) var(--ease), color var(--slow) var(--ease);
+}
+.btn:hover { background: var(--surface-hover); border-color: rgba(244, 234, 216, 0.3); color: var(--cream-50); }
+
+/* The main action on a page: cream button, navy text */
+.btn-primary {
+  color: var(--navy-900);
+  background: var(--cream-100);
+  border-color: var(--cream-100);
+}
+.btn-primary:hover { color: var(--navy-900); background: var(--cream-50); border-color: var(--cream-50); }
+
+.btn:disabled { opacity: 0.45; cursor: default; }
+
+/* A row of buttons */
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+/* Quiet on/off switch built from a normal checkbox
+   (still a real checkbox, so keyboards + screen readers work) */
+.switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  user-select: none;
+}
+.switch input {
+  appearance: none;
+  -webkit-appearance: none;
+  position: relative;
+  width: 40px;
+  height: 22px;
+  margin: 0;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--line);
+  cursor: pointer;
+  transition: background var(--slow) var(--ease);
+}
+.switch input::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--cream-100);
+  transition: transform 400ms var(--ease);
+}
+.switch input:checked { background: var(--blue-600); }
+.switch input:checked::after { transform: translateX(18px); }
+
+
+/* A soft card used for writing areas, steps, etc. */
+.panel {
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--space-3);
+  box-shadow: 0 20px 50px rgba(5, 10, 20, 0.25);
+}
+
+/* Single-line text box */
+.field {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.7rem 1.1rem;
+  font: inherit;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  transition: border-color var(--slow) var(--ease), background var(--slow) var(--ease);
+}
+.field::placeholder { color: var(--text-faint); }
+.field:hover { border-color: rgba(244, 234, 216, 0.28); }
+.field:focus { outline: none; border-color: var(--honey); background: rgba(255, 255, 255, 0.07); }
+
+/* A button that looks like a quiet underlined link */
+.text-btn {
+  min-height: 32px;
+  padding: 0;
+  font: inherit;
+  color: var(--text-muted);
+  background: none;
+  border: 0;
+  text-decoration: underline;
+  text-decoration-color: rgba(244, 234, 216, 0.3);
+  text-underline-offset: 0.25em;
+  cursor: pointer;
+}
+.text-btn:hover { color: var(--cream-50); text-decoration-color: currentColor; }
+
+/* Small quiet status line under an activity */
+.status {
+  min-height: 1.6em;
+  margin-top: var(--space-2);
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+
+/* ---------- 5. FOOTER ---------- */
+.site-footer {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-4) var(--space-2) var(--space-3);
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--text-faint);
+}
+.site-footer nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-1) var(--space-3);
+  margin-bottom: var(--space-1);
+}
+.site-footer a { color: var(--text-muted); text-decoration: none; }
+.site-footer a:hover { color: var(--cream-50); text-decoration: underline; }
+.site-footer p { margin: 0; }
+
+
+/* ---------- 6. HELPERS ---------- */
+
+/* Hides text visually but keeps it for screen readers */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* "Skip to content" link — appears only when tabbed to */
+.skip-link {
+  position: absolute;
+  left: var(--space-2);
+  top: -100px;
+  padding: 0.5rem 1rem;
+  background: var(--cream-100);
+  color: var(--navy-900);
+  border-radius: var(--radius-pill);
+  z-index: 10;
+}
+.skip-link:focus { top: var(--space-2); }
+
+/* Quiet "back home" link on activity pages */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  margin-bottom: var(--space-4);
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color var(--slow) var(--ease);
+}
+.back-link:hover { color: var(--cream-50); }
+.back-link span { transition: transform var(--slow) var(--ease); }
+.back-link:hover span { transform: translateX(-3px); }
+
+
+/* ---------- 7. REDUCED MOTION ----------
+   If someone has "reduce motion" turned on in their phone or
+   computer settings, switch off all animations and slides. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

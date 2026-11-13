@@ -1,0 +1,118 @@
+/* =========================================================
+   body-scan.css
+   ========================================================= */
+
+/* Length choice: two soft pill "radio buttons" */
+.scan-length {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-1);
+  margin: var(--space-3) 0 0;
+  padding: 0;
+  border: 0;
+}
+.scan-length label { position: relative; cursor: pointer; }
+.scan-length input {
+  position: absolute;
+  opacity: 0;          /* hidden, but still keyboard-usable */
+  inset: 0;
+  margin: 0;
+  cursor: pointer;
+}
+.scan-length span {
+  display: inline-block;
+  padding: 0.5rem 1.1rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  transition: all var(--slow) var(--ease);
+}
+.scan-length input:checked + span {
+  color: var(--navy-900);
+  background: var(--cream-100);
+  border-color: var(--cream-100);
+}
+.scan-length input:focus-visible + span { outline: 2px solid var(--focus); outline-offset: 3px; }
+
+/* Figure + words side by side on wide screens, stacked on phones */
+.scan-layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+@media (max-width: 560px) {
+  .scan-layout { flex-direction: column; gap: var(--space-2); margin-top: var(--space-3); }
+  .scan-figure { width: 86px !important; }
+}
+
+.scan-figure {
+  flex: none;
+  width: 120px;
+  height: auto;
+  overflow: visible;
+}
+.scan-figure [data-area] {
+  fill: rgba(52, 80, 122, 0.45);
+  stroke: rgba(244, 234, 216, 0.28);
+  stroke-width: 1.2;
+  transition: fill 1.6s var(--ease), stroke 1.6s var(--ease), filter 1.6s var(--ease);
+}
+/* The face shape is invisible until it's the focus */
+.scan-figure .scan-inner { fill: transparent; stroke: transparent; }
+
+/* The area we're focusing on glows warm */
+.scan-figure .is-active,
+.scan-figure .scan-inner.is-active {
+  fill: rgba(232, 196, 143, 0.55);
+  stroke: rgba(232, 196, 143, 0.9);
+  filter: drop-shadow(0 0 6px rgba(232, 196, 143, 0.6));
+}
+
+.scan-text {
+  flex: 1;
+  max-width: 320px;
+  min-height: 9.5em;
+  text-align: left;
+}
+@media (max-width: 560px) {
+  .scan-text { text-align: center; min-height: 8.5em; }
+}
+.scan-area {
+  margin-bottom: var(--space-1);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--honey);
+}
+.scan-cue {
+  font-size: 1.15rem;
+  font-weight: 300;
+  line-height: 1.6;
+  transition: opacity 700ms var(--ease);
+}
+.scan-cue.is-changing,
+.scan-area.is-changing { opacity: 0; }
+.scan-area { transition: opacity 700ms var(--ease); }
+
+/* Thin progress line */
+.scan-progress {
+  height: 3px;
+  max-width: 320px;
+  margin: var(--space-4) auto 0;
+  border-radius: 3px;
+  background: rgba(244, 234, 216, 0.1);
+  overflow: hidden;
+}
+.scan-progress span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--cream-300);
+  border-radius: 3px;
+  transition: width 1s linear;
+}
+
+.scan-options { margin-top: var(--space-2); }

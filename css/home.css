@@ -1,0 +1,119 @@
+/* =========================================================
+   home.css — the landing page and its bubble buttons
+   ========================================================= */
+
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-top: clamp(1.5rem, 8vh, 5rem);
+}
+
+.home h1 { margin-bottom: var(--space-1); }
+
+.home .lede { margin-bottom: var(--space-5); }
+
+
+/* ---------- BUBBLE GRID ---------- */
+.bubbles {
+  /* Bubble size grows with the screen, but stays within limits */
+  --bubble: clamp(92px, 26vw, 136px);
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(14px, 3vw, 28px);
+  max-width: calc(var(--bubble) * 4 + 28px * 3 + 4px); /* 4 per row on big screens */
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* The <li> does the slow floating, so the link inside can
+   do its own hover lift without the two fighting. */
+.bubbles li {
+  animation:
+    bubble-in 1100ms var(--ease) both,
+    float 7s ease-in-out infinite alternate;
+  /* --i is set in the HTML (0, 1, 2…) to stagger each bubble */
+  animation-delay:
+    calc(var(--i) * 90ms),
+    calc(var(--i) * -1.3s);
+}
+
+@keyframes bubble-in {
+  from { opacity: 0; transform: translateY(12px) scale(0.96); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes float {
+  from { translate: 0 0; }
+  to   { translate: 0 -8px; }
+}
+
+/* ---------- ONE BUBBLE ---------- */
+.bubble {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  width: var(--bubble);
+  height: var(--bubble);
+  padding: 0.75rem;
+  border-radius: 50%;
+  color: var(--cream-100);
+  text-decoration: none;
+  font-size: clamp(0.78rem, 2.6vw, 0.9rem);
+  font-weight: 500;
+  line-height: 1.25;
+
+  /* Soft, glassy circle: lighter at the top-left like light hitting it */
+  background:
+    radial-gradient(circle at 32% 28%, rgba(168, 187, 211, 0.28), transparent 60%),
+    linear-gradient(160deg, var(--blue-600), var(--blue-700) 70%);
+  border: 1px solid rgba(244, 234, 216, 0.16);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 10px 30px rgba(5, 10, 20, 0.35);
+
+  transition:
+    transform 700ms var(--ease),
+    box-shadow 700ms var(--ease),
+    border-color 700ms var(--ease);
+}
+
+.bubble svg {
+  width: 26px;
+  height: 26px;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.85;
+}
+
+/* Hover or keyboard focus: lift a little + warm glow */
+.bubble:hover,
+.bubble:focus-visible {
+  color: var(--cream-50);
+  transform: translateY(-4px) scale(1.04);
+  border-color: rgba(232, 196, 143, 0.45);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 0 0 6px rgba(232, 196, 143, 0.06),
+    0 0 42px rgba(232, 196, 143, 0.28),
+    0 14px 34px rgba(5, 10, 20, 0.4);
+}
+
+/* The round shape is the focus indicator, so use a round outline */
+.bubble:focus-visible { outline-offset: 6px; border-radius: 50%; }
+
+/* Gentle reminder under the bubbles */
+.home-note {
+  margin-top: var(--space-5);
+  font-size: 0.9rem;
+  color: var(--text-faint);
+}

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Body scan · exhale</title>
+  <meta name="description" content="A short guided body scan, from head to toe, with gentle on-screen cues. About 3 to 5 minutes.">
+  <meta name="theme-color" content="#111f33">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+
+  <!-- SEO + social sharing preview. Once the site is live, replace
+       YOUR-SITE-URL in every file with your real address (see README). -->
+  <link rel="canonical" href="https://YOUR-SITE-URL/activities/body-scan/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="exhale">
+  <meta property="og:title" content="Body scan · exhale">
+  <meta property="og:description" content="A short guided body scan, from head to toe, with gentle on-screen cues. About 3 to 5 minutes.">
+  <meta property="og:url" content="https://YOUR-SITE-URL/activities/body-scan/">
+  <meta property="og:image" content="https://YOUR-SITE-URL/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="exhale: a quiet place to breathe between studying">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="body-scan.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <a class="brand" href="../../index.html">exhale</a>
+    <nav class="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="../../timer/index.html">Study Timer</a></li>
+        <li><a href="../../journal/index.html">Journal</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main" class="page-narrow">
+    <a class="back-link" href="../../index.html"><span aria-hidden="true">←</span> back home</a>
+
+    <h1>Body scan</h1>
+    <p class="lede" id="intro">Sit or lie down comfortably. We'll move slowly from your head to your toes, just noticing. You don't have to change anything.</p>
+
+    <!-- Length choice (shown before starting) -->
+    <fieldset class="scan-length" id="lengthChoice">
+      <legend class="visually-hidden">How long?</legend>
+      <label><input type="radio" name="length" value="0.72"> <span>About 3 min</span></label>
+      <label><input type="radio" name="length" value="1.1" checked> <span>About 5 min</span></label>
+    </fieldset>
+
+    <div class="scan-layout">
+      <!-- ===== THE FIGURE =====
+           Simple shapes. Each has a data-area name; body-scan.js
+           adds the "is-active" class to the area we're focusing on. -->
+      <svg class="scan-figure" id="figure" viewBox="0 0 120 290" aria-hidden="true">
+        <ellipse data-area="head"      cx="60" cy="30" rx="18" ry="22"/>
+        <ellipse data-area="face"      cx="60" cy="38" rx="11" ry="10" class="scan-inner"/>
+        <rect    data-area="neck"      x="53" y="51" width="14" height="12" rx="5"/>
+        <rect    data-area="shoulders" x="30" y="60" width="60" height="14" rx="7"/>
+        <rect    data-area="chest"     x="35" y="72" width="50" height="42" rx="12"/>
+        <rect    data-area="belly"     x="38" y="113" width="44" height="34" rx="11"/>
+        <rect    data-area="hips"      x="36" y="146" width="48" height="24" rx="10"/>
+        <rect    data-area="arms"      x="17" y="66" width="13" height="82" rx="6.5"/>
+        <rect    data-area="arms"      x="90" y="66" width="13" height="82" rx="6.5"/>
+        <ellipse data-area="hands"     cx="23.5" cy="157" rx="7" ry="9"/>
+        <ellipse data-area="hands"     cx="96.5" cy="157" rx="7" ry="9"/>
+        <rect    data-area="legs"      x="38" y="168" width="19" height="96" rx="9"/>
+        <rect    data-area="legs"      x="63" y="168" width="19" height="96" rx="9"/>
+        <ellipse data-area="feet"      cx="46" cy="272" rx="12" ry="6.5"/>
+        <ellipse data-area="feet"      cx="74" cy="272" rx="12" ry="6.5"/>
+      </svg>
+
+      <div class="scan-text">
+        <p class="scan-area" id="areaText">Ready when you are</p>
+        <p class="scan-cue" id="cueText" aria-live="polite"></p>
+      </div>
+    </div>
+
+    <!-- Thin progress line -->
+    <div class="scan-progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+    <div class="controls">
+      <button class="btn btn-primary" id="startBtn" type="button">Begin</button>
+      <button class="btn" id="stopBtn" type="button" hidden>End</button>
+    </div>
+    <div class="controls scan-options">
+      <label class="switch">
+        <input type="checkbox" id="chimeToggle">
+        Soft chime between areas
+      </label>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <nav aria-label="Footer">
+      <a href="../../resources/index.html">Need to talk to someone?</a>
+      <a href="../../about/index.html">About</a>
+    </nav>
+    <p>Free, private, and made by a student for students.</p>
+  </footer>
+
+  <script src="../../js/main.js"></script>
+  <script src="../../js/chime.js"></script>
+  <script src="body-scan.js"></script>
+</body>
+</html>

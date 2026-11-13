@@ -1,0 +1,53 @@
+/* =========================================================
+   pages.css — simple reading pages (Resources, About)
+   ========================================================= */
+
+.reading {
+  max-width: var(--reading-width);
+  text-align: left;
+}
+.reading h1 { text-align: center; }
+.reading .lede { text-align: center; margin-bottom: var(--space-4); }
+.reading h2 { margin-top: var(--space-4); }
+.reading p, .reading li { color: var(--text-muted); }
+.reading strong { color: var(--text); font-weight: 500; }
+.reading ul { padding-left: 1.2em; }
+.reading li { margin-bottom: 0.4em; }
+
+/* Help cards on the Resources page */
+.help-list {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.help-card { margin: 0; }
+.help-card h2 { margin: 0 0 0.3rem; font-size: 1.15rem; }
+.help-card p { margin: 0 0 var(--space-2); }
+.help-card .big {
+  margin-bottom: var(--space-2);
+  font-size: 1.35rem;
+  font-weight: 400;
+  color: var(--cream-50);
+}
+.help-card .actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+.help-card .btn { min-height: 42px; }
+
+/* A gentle highlighted note */
+.soft-note {
+  margin-top: var(--space-4);
+  padding: var(--space-2) var(--space-3);
+  border-left: 2px solid var(--honey);
+  background: rgba(232, 196, 143, 0.05);
+  border-radius: 0 12px 12px 0;
+}
+.soft-note p { margin: 0; }
+
+/* About page: placeholder the student fills in */
+.from-maker { font-style: normal; }
+.signature { color: var(--text); margin-top: var(--space-1); }

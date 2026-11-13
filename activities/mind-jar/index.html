@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mind jar · exhale</title>
+  <meta name="description" content="Fold up the thoughts that are taking up space and drop them into a jar. Shake it, or let them all float away. Nothing is saved.">
+  <meta name="theme-color" content="#111f33">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+
+  <!-- SEO + social sharing preview. Once the site is live, replace
+       YOUR-SITE-URL in every file with your real address (see README). -->
+  <link rel="canonical" href="https://YOUR-SITE-URL/activities/mind-jar/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="exhale">
+  <meta property="og:title" content="Mind jar · exhale">
+  <meta property="og:description" content="Fold up the thoughts that are taking up space and drop them into a jar. Shake it, or let them all float away. Nothing is saved.">
+  <meta property="og:url" content="https://YOUR-SITE-URL/activities/mind-jar/">
+  <meta property="og:image" content="https://YOUR-SITE-URL/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="exhale: a quiet place to breathe between studying">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="mind-jar.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <a class="brand" href="../../index.html">exhale</a>
+    <nav class="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="../../timer/index.html">Study Timer</a></li>
+        <li><a href="../../journal/index.html">Journal</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main" class="page-narrow">
+    <a class="back-link" href="../../index.html"><span aria-hidden="true">←</span> back home</a>
+
+    <h1>Mind jar</h1>
+    <p class="lede">Type a thought that's taking up space. Fold it up and drop it in the jar. Nothing you write is saved.</p>
+
+    <!-- Where you type a thought -->
+    <form class="jar-form" id="thoughtForm" autocomplete="off">
+      <label class="visually-hidden" for="thought">A thought to put in the jar</label>
+      <input class="field" id="thought" type="text" maxlength="120"
+             placeholder="the chem test on friday…" autocomplete="off">
+      <button class="btn btn-primary" type="submit">Fold it in</button>
+    </form>
+
+    <!-- The jar itself is drawn on a canvas by mind-jar.js.
+         Paper previews get added inside this box while they fold. -->
+    <div class="jar-stage" id="stage">
+      <canvas id="jarCanvas" role="img" aria-label="An empty glass jar"></canvas>
+    </div>
+
+    <p class="status" id="status" aria-live="polite">The jar is empty.</p>
+
+    <div class="controls">
+      <button class="btn" id="shakeBtn" type="button" disabled>Shake</button>
+      <button class="btn" id="releaseBtn" type="button" disabled>Release</button>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <nav aria-label="Footer">
+      <a href="../../resources/index.html">Need to talk to someone?</a>
+      <a href="../../about/index.html">About</a>
+    </nav>
+    <p>Free, private, and made by a student for students.</p>
+  </footer>
+
+  <script src="../../js/main.js"></script>
+  <script src="mind-jar.js"></script>
+</body>
+</html>

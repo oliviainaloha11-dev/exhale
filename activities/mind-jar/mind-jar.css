@@ -1,0 +1,72 @@
+/* =========================================================
+   mind-jar.css
+   ========================================================= */
+
+.jar-form {
+  display: flex;
+  gap: var(--space-1);
+  max-width: 460px;
+  margin: var(--space-3) auto 0;
+}
+.jar-form .field { flex: 1; min-width: 0; }
+
+@media (max-width: 420px) {
+  .jar-form { flex-direction: column; }
+}
+
+/* Box that holds the canvas (and the folding paper previews) */
+.jar-stage {
+  position: relative;
+  width: min(78vw, 300px);
+  margin: var(--space-3) auto 0;
+  transform-origin: 50% 90%;  /* wobble from near the base */
+}
+.jar-stage canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* The jar wobbles when you press Shake */
+.jar-stage.is-shaking { animation: wobble 900ms var(--ease); }
+@keyframes wobble {
+  0%, 100% { transform: rotate(0); }
+  15% { transform: rotate(-4deg); }
+  35% { transform: rotate(3.5deg); }
+  55% { transform: rotate(-2.5deg); }
+  75% { transform: rotate(1.5deg); }
+}
+
+/* The paper slip with your words, before it folds.
+   mind-jar.js animates it: show → fold → fold → drop. */
+.slip-preview {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: min(230px, 80%);
+  padding: 0.85rem 1rem;
+  border-radius: 6px;
+  color: var(--navy-900);
+  background:
+    /* faint crease lines where it will fold */
+    linear-gradient(180deg, transparent 49.5%, rgba(17, 31, 51, 0.08) 50%, transparent 50.5%),
+    linear-gradient(90deg, transparent 49.5%, rgba(17, 31, 51, 0.06) 50%, transparent 50.5%),
+    var(--cream-100);
+  box-shadow: 0 8px 24px rgba(5, 10, 20, 0.35);
+  font-size: 0.9rem;
+  line-height: 1.4;
+  text-align: center;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+.slip-preview p {
+  margin: 0;
+  /* long thoughts get trimmed to 3 lines on the slip */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+}
