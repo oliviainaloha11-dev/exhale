@@ -58,6 +58,11 @@
 
   --max-width: 980px;
   --reading-width: 620px;
+
+  /* Tells the browser this is a dark site, so built-in bits
+     (scrollbars, form controls) match and phones don't
+     "auto-darken" our colors */
+  color-scheme: dark;
 }
 
 
