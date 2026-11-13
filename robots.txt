@@ -1,0 +1,6 @@
+# Search engines are welcome to read every page.
+User-agent: *
+Allow: /
+
+# Replace YOUR-SITE-URL with your real address once the site is live (see README).
+Sitemap: https://YOUR-SITE-URL/sitemap.xml

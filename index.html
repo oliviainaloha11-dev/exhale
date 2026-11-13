@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>exhale · a quiet place to breathe between studying</title>
+  <meta name="description" content="A free, calm space for busy students to breathe, unwind, and reset. No ads, no accounts, no tracking.">
+  <meta name="theme-color" content="#111f33">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <!-- SEO + social sharing preview. Once the site is live, replace
+       YOUR-SITE-URL in every file with your real address (see README). -->
+  <link rel="canonical" href="https://YOUR-SITE-URL/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="exhale">
+  <meta property="og:title" content="exhale · a quiet place to breathe between studying">
+  <meta property="og:description" content="A free, calm space for busy students to breathe, unwind, and reset. No ads, no accounts, no tracking.">
+  <meta property="og:url" content="https://YOUR-SITE-URL/">
+  <meta property="og:image" content="https://YOUR-SITE-URL/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="exhale: a quiet place to breathe between studying">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Font: Manrope from Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ===== HEADER (copy this block to every page; fix the ../ paths) ===== -->
+  <header class="site-header">
+    <a class="brand" href="index.html">exhale</a>
+    <nav class="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="index.html" aria-current="page">Home</a></li>
+        <li><a href="timer/index.html">Study Timer</a></li>
+        <li><a href="journal/index.html">Journal</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main" class="home">
+    <h1>Hey. Slow down for a second.</h1>
+    <p class="lede">You've been working hard. Pick something small and stay as long as you like.</p>
+
+    <!-- ===== ACTIVITY BUBBLES =====
+         To add one: copy an <li>, change the link, icon, label,
+         and bump the --i number (it staggers the float). -->
+    <ul class="bubbles">
+      <li style="--i:0">
+        <a class="bubble" href="activities/breathing/index.html">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="2.5"/></svg>
+          <span>Box breathing</span>
+        </a>
+      </li>
+      <li style="--i:1">
+        <a class="bubble" href="activities/mind-jar/index.html">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3h8M9 3v3c-2 1-3 2.5-3 5v7a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3v-7c0-2.5-1-4-3-5V3"/><path d="M9 15l2 1M13 13l2 1.5"/></svg>
+          <span>Mind jar</span>
+        </a>
+      </li>
+      <li style="--i:2">
+        <a class="bubble" href="activities/unsent-letter/index.html">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="6" width="17" height="12" rx="2"/><path d="M4 7l8 6 8-6"/></svg>
+          <span>Unsent letter</span>
+        </a>
+      </li>
+      <li style="--i:3">
+        <a class="bubble" href="activities/grounding/index.html">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19c0-8 6-14 14-14 0 8-6 14-14 14z"/><path d="M5 19l7-7"/></svg>
+          <span>5-4-3-2-1</span>
+        </a>
+      </li>
+      <li style="--i:4">
+        <a class="bubble" href="activities/body-scan/index.html">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="2.2"/><path d="M12 8v7M8 10.5l4-1 4 1M9.5 21l2.5-6 2.5 6"/></svg>
+          <span>Body scan</span>
+        </a>
+      </li>
+      <li style="--i:5">
+        <a class="bubble" href="activities/stretches/index.html">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="6" r="2.2"/><path d="M6 3.5l6 5 6-5M12 8.5V15M9 21l3-6 3 6"/></svg>
+          <span>Desk stretches</span>
+        </a>
+      </li>
+      <li style="--i:6">
+        <a class="bubble" href="activities/sounds/index.html">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9c2-2 4-2 6 0s4 2 6 0 4-2 6 0M3 15c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/></svg>
+          <span>Calm sounds</span>
+        </a>
+      </li>
+    </ul>
+
+    <p class="home-note">Nothing here is saved or tracked. It's just for you.</p>
+  </main>
+
+  <!-- ===== FOOTER (copy to every page; fix the ../ paths) ===== -->
+  <footer class="site-footer">
+    <nav aria-label="Footer">
+      <a href="resources/index.html">Need to talk to someone?</a>
+      <a href="about/index.html">About</a>
+    </nav>
+    <p>Free, private, and made by a student for students.</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
