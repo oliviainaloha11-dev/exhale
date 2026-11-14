@@ -2,7 +2,7 @@
   "name": "exhale",
   "short_name": "exhale",
   "description": "A quiet place to breathe between studying. Free, private, and calm.",
-  "start_url": "./",
+  "start_url": "./?ref=app",
   "scope": "./",
   "display": "standalone",
   "orientation": "any",

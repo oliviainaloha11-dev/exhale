@@ -25,6 +25,9 @@
 
   const rand = function (a, b) { return a + Math.random() * (b - a); };
 
+  // Pressing Enter in the "Dear ___" box must never submit the letter anywhere
+  letter.addEventListener("submit", function (e) { e.preventDefault(); });
+
   // ----- Grow the textarea to fit the words -----
   function autoGrow() {
     body.style.height = "auto";

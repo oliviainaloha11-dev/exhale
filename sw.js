@@ -17,7 +17,7 @@
    and change VERSION (e.g. "exhale-v2") so phones re-save.
    ========================================================= */
 
-const VERSION = "exhale-v1";
+const VERSION = "exhale-v2";
 
 // Every file the site needs, relative to this file
 const FILES = [
@@ -27,11 +27,14 @@ const FILES = [
   "favicon.svg",
   "icon-192.png",
   "icon-512.png",
+  "fonts/manrope-latin.woff2",
+  "fonts/manrope-latin-ext.woff2",
   "css/base.css",
   "css/home.css",
   "css/pages.css",
   "js/main.js",
   "js/chime.js",
+  "js/count.js",
   "activities/breathing/index.html",
   "activities/breathing/breathing.css",
   "activities/breathing/breathing.js",
@@ -63,7 +66,8 @@ const FILES = [
   "journal/prompts.js",
   "journal/pdf-maker.js",
   "resources/index.html",
-  "about/index.html"
+  "about/index.html",
+  "privacy/index.html"
 ];
 
 // 1. Install: save every file
@@ -93,16 +97,16 @@ self.addEventListener("fetch", function (event) {
   const request = event.request;
   if (request.method !== "GET") return;
 
+  // Only handle exhale's own files. Anything else (like the anonymous
+  // visit counter) goes straight to the network and is never saved.
   const url = new URL(request.url);
-  const isOurs = url.origin === self.location.origin;
-  const isFont = url.hostname === "fonts.googleapis.com" || url.hostname === "fonts.gstatic.com";
-  if (!isOurs && !isFont) return;    // anything else: let the browser handle it
+  if (url.origin !== self.location.origin) return;
 
   event.respondWith(
     fetch(request)
       .then(function (response) {
         // Save a fresh copy for next time we're offline
-        if (response && (response.ok || response.type === "opaque")) {
+        if (response && response.ok) {
           const copy = response.clone();
           caches.open(VERSION).then(function (cache) { cache.put(request, copy); });
         }

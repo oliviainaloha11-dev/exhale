@@ -111,11 +111,17 @@ Your address looks like `https://USERNAME.github.io/exhale/`. Search engines and
 
 ### Step 6: Tell Google about it (optional, but helps it show up)
 1. Go to **search.google.com/search-console** and sign in.
-2. Add a property → **URL prefix** → paste your site address.
-3. Verify it. The easiest way is the **HTML tag** option: copy the `<meta name="google-site-verification" …>` tag
-   into the `<head>` of `index.html`, upload it, then click **Verify**.
-4. In the left menu → **Sitemaps** → enter `sitemap.xml` → **Submit**.
-5. Google usually starts showing new sites within a few days to a few weeks.
+2. Add a property → choose **Domain** → type `exhalebetween.com` (no https, no www).
+3. Google gives you a TXT record (`google-site-verification=…`). Copy it.
+4. In Porkbun → exhalebetween.com → DNS records → **Add record**:
+   Type **TXT**, Host *(empty)*, Answer *(paste Google's code)* → Add.
+5. Back in Google → **Verify**. If it fails, wait 10 minutes and try again.
+6. In the left menu → **Sitemaps** → enter `sitemap.xml` → **Submit**.
+7. Google usually starts showing new sites within a few days to a few weeks.
+
+*(If you don't have access to the domain's DNS, you can use **URL prefix** + the **HTML tag**
+method instead: paste Google's `<meta name="google-site-verification" …>` tag into the `<head>` of
+`index.html` and upload it.)*
 
 ### Updating the site later
 Change files on your computer → upload them to the repository again (**Add file → Upload files**) → wait a minute.

@@ -129,3 +129,32 @@ All tests ran in headless Chrome with an automated test script. I took screensho
   - With reduced motion on, no long animations run and the bubbles stop floating.
 - **Regression:** I re-ran all stage tests at the end. Everything passes except one body-scan timing check. That one read the text halfway through a 0.7-second fade; a separate test confirmed pause and resume work correctly.
 - **Console errors across the whole site: 0.**
+
+## 🚀 Launched: 2026-11-13
+- **Live at https://exhalebetween.com.** The domain is through Porkbun, renews Nov 2027, auto-renew on, and is hosted free on GitHub Pages.
+- **Address forwarding works:** HTTPS is on, http goes to https, and the old link `oliviainaloha11-dev.github.io/exhale/` forwards to the new domain.
+- **DNS:** 4 A records point to GitHub Pages, plus a `www` CNAME. Porkbun's default link-in-bio forward was removed.
+- **Your About note is live.**
+- **It's an installable app now:**
+  - `manifest.webmanifest`, 3 app icons, `sw.js` (offline mode) and `color-scheme: dark` (stops Android auto-darkening).
+  - Tested on the live domain at Android size: Chrome reports it's installable, and all 12 pages and breathing work with the internet off.
+- **When you add a new file later,** add it to the `FILES` list in `sw.js` and bump `VERSION`.
+
+## 🔒 Privacy upgrade + visit counter (2026-11-13)
+- **Font stored on our own site** (`fonts/`, OFL license). Visitors never contact Google.
+- **Security lock (CSP)** on every page: pages can only load exhale's own files and can only send to the visit counter. Forms can't submit anywhere.
+- **Journal:** a new "Save my draft on this device" switch. Turning it off deletes any saved draft and is remembered on that device, which suits shared and library computers.
+- **New Privacy page** (`privacy/`), linked in every footer. It's written for teens and parents, and Google Play needs it later. The About page wording and the "no tracking" meta descriptions were updated to stay honest.
+- **GoatCounter** (code `exhalebetween`):
+  - The counter script is stored locally at `js/count.js`.
+  - It sends only page, title, referrer and screen width. No cookies, no IP stored.
+  - The installed app opens with `?ref=app`, so app use shows up separately. Library QR codes can use `?ref=library`.
+- **Tested:**
+  - 0 security-lock violations across all 13 pages and every feature (downloads, audio, canvas, drawings).
+  - The only outside host contacted is the counter.
+  - Offline mode still works for 13/13 pages.
+  - All stage regressions pass.
+- **Next:**
+  - Install it on your Android phone.
+  - Submit `sitemap.xml` in Google Search Console (README, Step 6).
+  - Turn on 2FA for Porkbun and GitHub.

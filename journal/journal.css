@@ -75,6 +75,8 @@
   color: var(--text-faint);
 }
 
+.save-toggle { margin-top: var(--space-2); }
+
 .confirm { margin-top: var(--space-3); animation: page-in 600ms var(--ease) both; }
 .confirm p { margin: 0; color: var(--text-muted); }
 .confirm .controls { margin-top: var(--space-2); }

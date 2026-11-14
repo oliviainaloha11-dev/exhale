@@ -10,6 +10,7 @@
 
 (function () {
   const DRAFT_KEY = "exhale.journal.draft";
+  const NOSAVE_KEY = "exhale.journal.nosave";   // remembers "don't save" on this device
   const prompts = Calm.PROMPTS;
 
   // ----- Elements -----
@@ -36,6 +37,9 @@
   let promptIndex = dayOfYear % prompts.length;
   let showPrompt = true;
   let saveTimer = null;
+  let saving = true;          // false = "Save my draft on this device" is off
+  const saveToggle = document.getElementById("saveToggle");
+  const NOT_SAVING = "Not saving. Your writing disappears when you close this page.";
 
 
   /* ---------- Saving the draft (this device only) ---------- */
@@ -44,6 +48,7 @@
   }
 
   function saveDraft() {
+    if (!saving) { saveText.textContent = NOT_SAVING; return; }
     const store = storage();
     if (!store) { saveText.textContent = "Autosave is off in this browser (private mode?)."; return; }
     try {
@@ -66,6 +71,14 @@
     const store = storage();
     if (!store) return;
     try {
+      // Did someone on this device switch saving off? Then don't load or keep anything.
+      if (store.getItem(NOSAVE_KEY) === "1") {
+        saving = false;
+        saveToggle.checked = false;
+        store.removeItem(DRAFT_KEY);
+        saveText.textContent = NOT_SAVING;
+        return;
+      }
       const d = JSON.parse(store.getItem(DRAFT_KEY));
       if (!d || !d.text) return;
       entry.value = d.text;
@@ -190,6 +203,25 @@
     add("div", "ps-body", body);
     add("p", "ps-foot", "Written privately with exhale");
   }
+
+
+  /* ---------- "Save my draft on this device" switch ---------- */
+  saveToggle.addEventListener("change", function () {
+    const store = storage();
+    saving = saveToggle.checked;
+    try {
+      if (!saving) {
+        // Off: delete any saved draft right away, and remember the choice
+        if (store) { store.removeItem(DRAFT_KEY); store.setItem(NOSAVE_KEY, "1"); }
+        saveText.textContent = NOT_SAVING;
+        statusEl.textContent = "Saving is off. Anything saved before has been deleted from this device.";
+      } else {
+        if (store) store.removeItem(NOSAVE_KEY);
+        statusEl.textContent = "Saving is on.";
+        saveDraft();
+      }
+    } catch (e) { /* storage blocked: nothing is saved anyway */ }
+  });
 
 
   /* ---------- Clearing ---------- */
